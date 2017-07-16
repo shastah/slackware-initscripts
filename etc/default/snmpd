@@ -1,0 +1,2 @@
+# Options to start snmpd with. Defaults are:
+# SNMPD_OPTIONS="-A -a"

@@ -3,13 +3,25 @@
 # rc.snmpd	This shell script takes care of starting and stopping
 #		the net-snmp SNMP daemon
 
-OPTIONS="-A -p /var/run/snmpd -a"
+# Source options
+if [ -f /etc/default/snmpd ]; then
+	. /etc/default/snmpd
+fi
+if [ -z "$SNMPD_OPTIONS" ]; then
+	SNMPD_OPTIONS="-A -a"
+fi
+if [ -z "$SNMPD_PIDFILE" ]; then
+	SNMPD_PIDFILE="/var/run/snmpd"
+fi
+if [ -z "$SNMPD_CONFIG" ]; then
+	SNMPD_CONFIG="/etc/snmp/snmpd.conf"
+fi
 
 start() {
-	if [ -x /usr/sbin/snmpd -a -f /etc/snmp/snmpd.conf ]; then
+	if [ -x /usr/sbin/snmpd -a -f "$SNMPD_CONFIG" ]; then
 		echo -n "Starting snmpd: "
-		/usr/sbin/snmpd $OPTIONS -c /etc/snmp/snmpd.conf
-		echo " /usr/sbin/snmpd $OPTIONS -c /etc/snmp/snmpd.conf"
+		echo " /usr/sbin/snmpd -c $SNMPD_CONFIG -p $SNMPD_PIDFILE $SNMPD_OPTIONS"
+		/usr/sbin/snmpd -c "$SNMPD_CONFIG" -p "$SNMPD_PIDFILE" $SNMPD_OPTIONS
 	fi
 }
 
@@ -43,7 +55,7 @@ case "$1" in
 	start
 	;;
   condrestart)
-	if [ -f /var/run/snmpd ]; then
+	if [ -f "$SNMPD_PIDFILE" ]; then
 	    stop
 	    start
 	fi
