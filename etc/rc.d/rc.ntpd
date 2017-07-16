@@ -1,19 +1,30 @@
 #!/bin/sh
 # Start/stop/restart ntpd.
 
+# Source settings
+if [ -r /etc/default/ntpd ]; then
+  . /etc/default/ntpd
+fi
+if [ -z "$NTPD_OPTS" ]; then
+  NTPD_OPTS="-g -u ntp:ntp"
+fi
+if [ -z "$NTPD_PIDFILE" ]; then
+  NTPD_PIDFILE="/var/run/ntpd.pid"
+fi
+
 # Start ntpd:
 ntpd_start() {
-  echo -n "Starting NTP daemon:  /usr/sbin/ntpd -g -u ntp:ntp"
-  /usr/sbin/ntpd -g -u ntp:ntp
+  echo -n "Starting NTP daemon:  /usr/sbin/ntpd -p $NTPD_PIDFILE $NTPD_OPTS"
+  /usr/sbin/ntpd -p $NTPD_PIDFILE $NTPD_OPTS
   echo
 }
 
 # Stop ntpd:
 ntpd_stop() {
   echo -n "Stopping NTP daemon..."
-  if [ -r /var/run/ntpd.pid ]; then
-    kill -HUP $(cat /var/run/ntpd.pid)
-    rm -f /var/run/ntpd.pid
+  if [ -r "$NTPD_PIDFILE" ]; then
+    kill -HUP $(cat "$NTPD_PIDFILE")
+    rm -f "$NTPD_PIDFILE"
   else
     killall -HUP -q ntpd
   fi
@@ -29,8 +40,8 @@ ntpd_restart() {
 
 # Check if ntpd is running
 ntpd_status() {
-  if [ -e /var/run/ntpd.pid ]; then
-    echo "ntpd is running as pid $(cat /var/run/ntpd.pid)."
+  if [ -e "$NTPD_PIDFILE" ]; then
+    echo "ntpd is running as pid $(cat "$NTPD_PIDFILE")."
   else 
     echo "ntpd is stopped."
     exit 1

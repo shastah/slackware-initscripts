@@ -1,0 +1,2 @@
+# Options to start ntpd with (defaults are shown in the example below).
+#NTPD_OPTS="-g -u ntp:ntp"
