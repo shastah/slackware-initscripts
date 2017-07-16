@@ -1,0 +1,38 @@
+# Optional port rquotad should listen on.
+#RPC_RQUOTAD_PORT=875
+# Optinal options passed to rquotad. See rquotad(8)
+#RPC_RQUOTAD_OPTS=""
+#
+#
+# TCP port rpc.lockd should listen on.
+#LOCKD_TCP_PORT=32803
+# UDP port rpc.lockd should listen on.
+#LOCKD_UDP_PORT=32769
+#
+#
+# Optional arguments passed to rpc.nfsd. See rpc.nfsd(8)
+# Turn off v2 and v3 protocol support
+#RPC_NFSD_OPTS="-N 2 -N 3"
+# Turn off v4 protocol support
+#RPC_NFSD_OPTS="-N 4"
+# Number of nfs server processes to be started.
+# The default is 8.
+#RPC_NFSD_COUNT=8
+#
+# Optional arguments passed to rpc.mountd. See rpc.mountd(8)
+#RPC_MOUNTD_OPTS=""
+# Port rpc.mountd should listen on.
+#RPC_MOUNTD_PORT=892
+#
+#
+# Optional arguments passed to rpcbind. See rpcbind(8)
+#RPCBIND_OPTS=""
+#
+# Optional arguments passed to rpc.statd. See rpc.statd(8)
+#RPC_STATD_OPTS=""
+# Optional hostname to start rpc.statd with.
+#RPC_STATD_HOSTNAME="darknet"
+# Port rpc.statd should listen on.
+#RPC_STATD_PORT=662
+# Outgoing port rpc.statd should use.
+#RPC_STATD_OUTGOING_PORT=2020
