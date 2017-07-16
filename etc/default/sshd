@@ -1,0 +1,7 @@
+# Optional arguments to start sshd with.
+#
+# If you want to run sshd on a non-standard port, use
+# SSHD_OPTS="-p 12345"
+#
+# If you want to use non-standard sshd_config, use
+# SSHD_OPTS="-f /some/other/sshd_config"
