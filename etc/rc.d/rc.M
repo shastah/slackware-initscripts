@@ -279,10 +279,13 @@ if [ -x /sbin/accton -a -r /var/log/pacct ]; then
 fi
 
 # Start crond (Dillon's crond):
-# If you want cron to actually log activity to /var/log/cron, then change
-# -l notice to -l info to increase the logging level.
 if [ -x /usr/sbin/crond ]; then
-  /usr/sbin/crond -l notice
+  if [ -r /etc/default/crond ]; then
+    if [ -z "$CROND_OPTS" ]; then
+      CROND_OPTS="-l notice"
+    fi
+  fi
+  /usr/sbin/crond $CROND_OPTS
 fi
 
 # Start atd (manages jobs scheduled with 'at'):
