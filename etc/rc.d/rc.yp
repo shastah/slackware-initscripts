@@ -103,9 +103,9 @@ yp_stop() {
 # domainname is the name of a domain served by your NIS server.
 #
 # If /etc/defaultdomain has not been configured we'll bail out.
-if [ -r /etc/defaultdomain -a -x /bin/nisdomainname ]; then
-  if [ "$(nisdomainname)" == "(none)" ]; then
-    nisdomainname `cat /etc/defaultdomain`
+if [ -r /etc/defaultdomain ] && [ -x /bin/nisdomainname ]; then
+  if [ "$(nisdomainname)" = "(none)" ]; then
+    nisdomainname $(cat /etc/defaultdomain)
   fi
 else
   echo "/etc/rc.d/rc.yp:  NIS not configured.  Hint: set up /etc/defaultdomain."
