@@ -1,0 +1,4 @@
+# Optional additional arguments passed to cgmanager upon startup.
+# By default there are none, but you might find this useful when
+# trying to run systemd-based containers:
+# CGMANAGER_OPTS="-m name=systemd"

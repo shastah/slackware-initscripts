@@ -22,8 +22,8 @@ start_cgmanager() {
       exit 1
     fi
   fi
-  echo "Starting cgmanager:  /usr/sbin/cgmanager --daemon"
-  /usr/sbin/cgmanager --daemon
+  echo "Starting cgmanager:  /usr/sbin/cgmanager --daemon $CGMANAGER_OPTS"
+  /usr/sbin/cgmanager --daemon $CGMANAGER_OPTS
 }
 
 stop_cgmanager() {
