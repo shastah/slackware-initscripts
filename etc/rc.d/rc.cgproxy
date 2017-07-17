@@ -13,8 +13,8 @@ start_cgproxy() {
     echo "Error:  cgproxy should only run inside containers"
     exit 0
   fi
-  echo "Starting cgproxy:  /usr/sbin/cgproxy --daemon"
-  /usr/sbin/cgproxy --daemon
+  echo "Starting cgproxy:  /usr/sbin/cgproxy --daemon $CGPROXY_OPTS"
+  /usr/sbin/cgproxy --daemon $CGPROXY_OPTS
 }
 
 stop_cgproxy() {
