@@ -281,9 +281,10 @@ fi
 # Start crond (Dillon's crond):
 if [ -x /usr/sbin/crond ]; then
   if [ -r /etc/default/crond ]; then
-    if [ -z "$CROND_OPTS" ]; then
-      CROND_OPTS="-l notice"
-    fi
+    . /etc/default/crond
+  fi
+  if [ -z "$CROND_OPTS" ]; then
+    CROND_OPTS="-l notice"
   fi
   /usr/sbin/crond $CROND_OPTS
 fi
